@@ -9,7 +9,7 @@ Authors@R: c(
     person("Pavel", "Cherenkov", email = "cherenkov.p.a@yandex.ru",
         role = c("aut", "cre")),
     person("Victoria", "Mironova", role = "aut")
-)
+    )
 License: GPL-3
 Depends: R (>= 3.3.2)
 Imports:
