@@ -1,5 +1,5 @@
 # metaRE
-R package for motif discovery via meta-analysis of microarrays and RNA-Seq
+R package for motif discovery via meta-analysis of microarray and RNA-seq data.
 
 ## System requirements
 
@@ -8,33 +8,30 @@ R package for motif discovery via meta-analysis of microarrays and RNA-Seq
 
 ## Installation
 
-1. Install [Bioconductor](http://www.bioconductor.org/):
-```R 
-## try http:// if https:// URLs are not supported
-source("https://bioconductor.org/biocLite.R")
-biocLite()
+1. Install the CRAN and Bioconductor dependencies:
+```r
+install.packages(c("Rcpp", "BH", "futile.logger", "foreach"))
+
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+  install.packages("BiocManager")
+}
+
+BiocManager::install(c("limma", "edgeR", "GEOquery", "Biobase"))
 ```
 
-2. Install required packages:
-```R
-install.packages(c('Rcpp',  'BH', 'futile.logger', 'foreach'))
-biocLite(c('limma', 'edgeR', 'GEOquery'))
-```
-
-3. Download metaRE:
+2. Download `metaRE`:
 ```
 git clone https://github.com/cheburechko/metaRE
 ```
 
-4. Install metaRE:
-From console
+3. Install `metaRE` from the command line:
 ```
 R CMD INSTALL [path/to/package]
 ```
 
-or from R using [devtools](https://cran.r-project.org/web/packages/devtools/index.html)
+Or from R using `devtools`:
 
-```R
-install.packages('devtools')
-devtools::install('[path/to/package]')
+```r
+install.packages("devtools")
+devtools::install("[path/to/package]")
 ```
