@@ -173,8 +173,10 @@ permutationTest <- function(
     tasks <- lapply(1:cores, function(core) ((core-1)*perCore+1):min(n, core*perCore))
     foreach(
         task=tasks,
-        .export=c('hypothesesClasses', 'annotationClasses', 'realMetaPValues',
-                  'alternative'),
+        .export=c(
+            'hypothesesClasses', 'annotationClasses', 'realMetaPValues',
+            'alternative', 'bulkSumlog', 'geneCounts', 'massFisherTest'
+        ),
         .inorder = FALSE,
         .combine=`+`
     ) %dopar% {

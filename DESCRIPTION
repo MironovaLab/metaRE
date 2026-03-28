@@ -23,7 +23,7 @@ Imports:
     Biobase (>= 2.34.0)
 LinkingTo: Rcpp, BH, testthat
 Encoding: UTF-8
-SystemRequirements: C++11
+SystemRequirements: C++14
 LazyData: true
 Suggests: testthat,
     knitr,

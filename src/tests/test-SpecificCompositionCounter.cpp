@@ -1,5 +1,6 @@
 #include <testthat.h>
 #include <iostream>
+#include <memory>
 
 #include "fakeit.hpp"
 

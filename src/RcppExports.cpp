@@ -5,9 +5,14 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // massFisherTest
 NumericMatrix massFisherTest(const LogicalMatrix& experiments, const IntegerVector& sums, const List& elements, std::string altString);
-RcppExport SEXP metaRE_massFisherTest(SEXP experimentsSEXP, SEXP sumsSEXP, SEXP elementsSEXP, SEXP altStringSEXP) {
+RcppExport SEXP _metaRE_massFisherTest(SEXP experimentsSEXP, SEXP sumsSEXP, SEXP elementsSEXP, SEXP altStringSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -21,7 +26,7 @@ END_RCPP
 }
 // quickFisherTest
 NumericVector quickFisherTest(NumericVector eff1, NumericVector n1, NumericVector eff2, NumericVector n2, std::string alternative);
-RcppExport SEXP metaRE_quickFisherTest(SEXP eff1SEXP, SEXP n1SEXP, SEXP eff2SEXP, SEXP n2SEXP, SEXP alternativeSEXP) {
+RcppExport SEXP _metaRE_quickFisherTest(SEXP eff1SEXP, SEXP n1SEXP, SEXP eff2SEXP, SEXP n2SEXP, SEXP alternativeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -36,7 +41,7 @@ END_RCPP
 }
 // enumerateMotifsCpp
 SEXP enumerateMotifsCpp(List parameters, Function createGCS, Function logDebug);
-RcppExport SEXP metaRE_enumerateMotifsCpp(SEXP parametersSEXP, SEXP createGCSSEXP, SEXP logDebugSEXP) {
+RcppExport SEXP _metaRE_enumerateMotifsCpp(SEXP parametersSEXP, SEXP createGCSSEXP, SEXP logDebugSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -46,4 +51,16 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(enumerateMotifsCpp(parameters, createGCS, logDebug));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_metaRE_massFisherTest", (DL_FUNC) &_metaRE_massFisherTest, 4},
+    {"_metaRE_quickFisherTest", (DL_FUNC) &_metaRE_quickFisherTest, 5},
+    {"_metaRE_enumerateMotifsCpp", (DL_FUNC) &_metaRE_enumerateMotifsCpp, 3},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_metaRE(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

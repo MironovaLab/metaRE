@@ -2,16 +2,16 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 massFisherTest <- function(experiments, sums, elements, altString) {
-    .Call('metaRE_massFisherTest', PACKAGE = 'metaRE', experiments, sums, elements, altString)
+    .Call('_metaRE_massFisherTest', PACKAGE = 'metaRE', experiments, sums, elements, altString)
 }
 
 quickFisherTest <- function(eff1, n1, eff2, n2, alternative) {
-    .Call('metaRE_quickFisherTest', PACKAGE = 'metaRE', eff1, n1, eff2, n2, alternative)
+    .Call('_metaRE_quickFisherTest', PACKAGE = 'metaRE', eff1, n1, eff2, n2, alternative)
 }
 
 #' @useDynLib metaRE
 #' @import Rcpp
 enumerateMotifsCpp <- function(parameters, createGCS, logDebug) {
-    .Call('metaRE_enumerateMotifsCpp', PACKAGE = 'metaRE', parameters, createGCS, logDebug)
+    .Call('_metaRE_enumerateMotifsCpp', PACKAGE = 'metaRE', parameters, createGCS, logDebug)
 }
 

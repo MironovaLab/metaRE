@@ -1,6 +1,10 @@
 #ifndef ENCODINGS_H_
 #define ENCODINGS_H_
 
+#include <cstdint>
+#include <exception>
+#include <string>
+
 typedef uint64_t cell;
 typedef char base;
 

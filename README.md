@@ -4,7 +4,7 @@ R package for motif discovery via meta-analysis of microarray and RNA-seq data.
 ## System requirements
 
 - R >= 3.3.2
-- Compiler with C++11 support
+- Compiler with C++14 support
 
 ## Installation
 
