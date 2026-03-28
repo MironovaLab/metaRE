@@ -1,7 +1,5 @@
 library(testthat)
 
-context("contTableGenerator")
-
 test_that("massFisherTest works like fisher.test", {
     samples <- 1000
     maxValues <- 1000

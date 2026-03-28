@@ -1,7 +1,5 @@
 library(testthat)
 
-context('MassContingencyTable')
-
 test_that("MassContingencyTable", {
     elements <- 3
     genes <- 200

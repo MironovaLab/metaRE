@@ -1,7 +1,5 @@
 library(testthat)
 
-context("calcMetaAssociation")
-
 test_that("bulkSumlog", {
     cols <- 10
     rows <- 10
@@ -53,7 +51,7 @@ test_that("calcMetaAssociaiton", {
                          dimnames=list(elemNames, expNames))
 
     result <- calcMetaAssociation(assocTable, 'bonferroni')
-    expect_is(result, 'MetaAssociationTable')
+    expect_s3_class(result, 'MetaAssociationTable')
     expect_equal(attr(result, 'adjustMethod'), 'bonferroni')
     expect_equal(attr(result, 'experimentCount'), experiments)
     expect_equal(length(intersect(rownames(result), elemNames)), elements)
@@ -106,7 +104,7 @@ test_that("testRegulationHypotheses", {
     test <- testRegulationHypotheses(gcs, gcm, adjust='bonferroni')
     metaResult <- setNames(metaResult[rownames(test)], NULL)
 
-    expect_is(test, 'MetaAssociationTable')
+    expect_s3_class(test, 'MetaAssociationTable')
     expect_equal(attr(test, 'adjustMethod'), 'bonferroni')
     expect_equal(attr(test, 'experimentCount'), experiments)
 

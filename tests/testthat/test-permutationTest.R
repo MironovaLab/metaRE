@@ -1,7 +1,5 @@
 library(testthat)
 
-context("permutationTest")
-
 elements <- paste0('elem', 1:10)
 genes <- paste0('gene', 1:100)
 experiments <- paste0('exp', 1:10)

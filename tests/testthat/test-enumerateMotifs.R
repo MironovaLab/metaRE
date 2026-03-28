@@ -1,7 +1,5 @@
 library(testthat)
 
-context("enumerateMotifs")
-
 test_sequences <- c(
     gene1='aaaatgtcaaaa',
     gene2='ccccaaaagggg',

@@ -1,7 +1,5 @@
 library(testthat)
 
-context('GeneClassifcation')
-
 test_that("GeneClassifcationSparse", {
     x <- list(
         elem1=c(1,2,3),
@@ -12,7 +10,7 @@ test_that("GeneClassifcationSparse", {
     gcs <- GeneClassificationSparse(x, genes)
 
     expect_equal(genes, geneNames(gcs))
-    expect_equivalent(x, gcs)
+    expect_equal(x, gcs, ignore_attr = TRUE)
 
     expect_error(
         GeneClassificationSparse(c(10, 20, 30), paste0('gene', 1:30)),
@@ -40,7 +38,7 @@ test_that("GeneClassificationMatrix", {
     gcm <- GeneClassificationMatrix(data)
 
     expect_equal(geneCounts(gcm), colSums(data))
-    expect_equivalent(gcm[1:length(data)], data[1:length(data)])
+    expect_equal(gcm[1:length(data)], data[1:length(data)], ignore_attr = TRUE)
 
     expect_error(GeneClassificationMatrix(matrix(runif(30), 6, 5)))
     expect_error(geneCounts(data))
