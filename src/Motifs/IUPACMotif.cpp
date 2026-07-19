@@ -131,7 +131,7 @@ bool IUPACMotif::includes(cell otherBuf[], unsigned length) const {
     cell presentMask = 0xffffffffffffffff;
     for (unsigned i = 0; i < bufSize && result; i++) {
         if (i == bufSize-1 && length % IUPAC_PER_CELL != 0) {
-            presentMask = (1L << ((length % IUPAC_PER_CELL) * IUPAC_SIZE)) - 1L;
+            presentMask = ((cell)1 << ((length % IUPAC_PER_CELL) * IUPAC_SIZE)) - (cell)1;
             mask &= presentMask;
         }
 

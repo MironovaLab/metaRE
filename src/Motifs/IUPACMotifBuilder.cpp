@@ -61,8 +61,14 @@ void IUPACMotifBuilder::fillComplementBuf(unsigned size, cell compBuf[]) const {
     unsigned cellSize = (sizeof(cell) * 8);
     unsigned bitShift = shift % cellSize;
     unsigned arrayShift = shift / cellSize;
-    cell mask = (-1L) ^ ((1L << bitShift) - 1L);
-    for (int i = 0;  i < bufSize - arrayShift - 1;  ++i)
+    if (bitShift == 0) {
+        // whole-cell shift: shifting a cell by cellSize is undefined, so copy.
+        for (int i = 0; i < (int)bufSize - (int)arrayShift; ++i)
+            compBuf[i] = complement[i + arrayShift];
+        return;
+    }
+    cell mask = (~(cell)0) ^ (((cell)1 << bitShift) - (cell)1);
+    for (int i = 0;  i < (int)bufSize - (int)arrayShift - 1;  ++i)
     {
         compBuf[i] = (complement[i+arrayShift] >> bitShift) |
                      ((complement[i+arrayShift+1] << (cellSize-bitShift)) & mask);

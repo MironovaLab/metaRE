@@ -69,18 +69,18 @@ bool Pattern::check(unsigned kmer) const {
 	if ((kmer >> MASK_SHIFT) >= maskSize) {
 		return false;
 	}
-	return mask[kmer >> MASK_SHIFT] & (((unsigned long) 1) << (kmer &  MASK_FILTER));
+	return mask[kmer >> MASK_SHIFT] & (((uint64_t) 1) << (kmer &  MASK_FILTER));
 }
 
 void Pattern::markPattern(unsigned kmer) {
 	if ((kmer >> MASK_SHIFT) < maskSize) {
-		mask[kmer >> MASK_SHIFT] |= ((unsigned long) 1) << (kmer &  MASK_FILTER);
+		mask[kmer >> MASK_SHIFT] |= ((uint64_t) 1) << (kmer &  MASK_FILTER);
 	}
 }
 
 void Pattern::init(std::string pattern) {
 	patternSize = pattern.length();
-	maskSize = 1 << (2*patternSize - MASK_SHIFT);
+	maskSize = ((uint64_t) 1) << (2*patternSize - MASK_SHIFT);
 
 	mask.resize(maskSize, 0);
 	add(pattern);

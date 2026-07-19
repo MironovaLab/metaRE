@@ -69,8 +69,14 @@ void CompactMotifBuilder::fillComplementBuf(unsigned size, cell compBuf[]) const
     unsigned cellSize = (sizeof(cell) * 8);
     unsigned bitShift = shift % cellSize;
     unsigned arrayShift = shift / cellSize;
-    cell mask = (-1L) ^ ((1L << bitShift) - 1L);
-    for (int i = 0;  i < bufSize - arrayShift - 1;  ++i)
+    if (bitShift == 0) {
+        // whole-cell shift: shifting a cell by cellSize is undefined, so copy.
+        for (int i = 0; i < (int)bufSize - (int)arrayShift; ++i)
+            compBuf[i] = complement[i + arrayShift];
+        return;
+    }
+    cell mask = (~(cell)0) ^ (((cell)1 << bitShift) - (cell)1);
+    for (int i = 0;  i < (int)bufSize - (int)arrayShift - 1;  ++i)
     {
         compBuf[i] = (complement[i+arrayShift] >> bitShift) |
             ((complement[i+arrayShift+1] << (cellSize-bitShift)) & mask);
@@ -91,7 +97,7 @@ CompactMotif * CompactMotifBuilder::buildComplement(unsigned size) const {
 void CompactMotifBuilder::write(cell * buf, unsigned size) const {
     unsigned lastCell = (size-1) / COMPACTS_PER_CELL;
     memcpy(buf, this->buf, (lastCell+1)*sizeof(cell));
-    buf[lastCell] &= (1 << (size % COMPACTS_PER_CELL * COMPACT_SIZE)) - 1;
+    buf[lastCell] &= ((cell)1 << (size % COMPACTS_PER_CELL * COMPACT_SIZE)) - (cell)1;
 }
 
 CompactMotifBuilder::~CompactMotifBuilder() {

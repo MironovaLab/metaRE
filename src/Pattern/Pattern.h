@@ -11,6 +11,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <cstdint>
 
 /* TODO
  * Make this an interface with 2 implementations:
@@ -27,7 +28,7 @@ class Pattern {
 private:
 	const unsigned MASK_SHIFT = 6, MASK_FILTER = 63;
 	unsigned long maskSize, patternSize;
-	std::vector<unsigned long> mask;
+	std::vector<uint64_t> mask;   // 64-bit words: MASK_SHIFT=6 / MASK_FILTER=63 index bits 0..63
 	static const std::map<char, const std::vector<unsigned> > lettersToInt;
 	void recursiveAdd(unsigned start, std::string end);
 	void markPattern(unsigned kmer);
